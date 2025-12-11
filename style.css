@@ -1,0 +1,390 @@
+:root {
+    --bg-color: #F6F5F8;
+    --dot-color: #D1D1E0;
+    
+    --card-bg: #FFFFFF;
+    --card-shadow: 0 10px 30px rgba(100, 100, 110, 0.1);
+    
+    --primary-text: #2D2D35;
+    --accent-color: #8E99CF; /* Lavender */
+    --accent-dark: #6C78B0;
+    
+    --tape-color: rgba(235, 230, 225, 0.9);
+    
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ✨ Loading Screen Styles ✨ --- */
+#loading-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #FDFBFD; /* Clean paper white */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+.loader-logo {
+    max-width: 175px; /* Adjust based on your logo size */
+    height: auto;
+    /* This makes white backgrounds in the jpg transparent */
+    mix-blend-mode: multiply; 
+    opacity: 0.9;
+    margin-left: 18px;
+}
+
+.loading-bar-container {
+    width: 200px;
+    height: 3px;
+    background: #E0E0E0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    transform: translateX(-100%);
+    animation: load 2s infinite ease-in-out;
+}
+
+.loader-content p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #888;
+    margin: 0;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+@keyframes load {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* --- Background Texture --- */
+.background-texture {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    opacity: 0.6;
+}
+
+/* --- Header --- */
+header {
+    text-align: center;
+    padding: 50px 0 30px;
+}
+
+h1 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: -0.02em;
+    color: var(--primary-text);
+}
+
+header p {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #999;
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+/* --- Layout --- */
+.main-wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 20px 60px;
+}
+
+.booth-layout {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* --- Camera Card --- */
+.camera-card {
+    position: relative;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transform: rotate(-1deg);
+}
+
+/* Tape Decoration */
+.tape {
+    position: absolute;
+    width: 120px;
+    height: 35px;
+    background-color: var(--tape-color);
+    opacity: 0.9;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 10;
+    background-image: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+}
+
+.tape.top {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    -webkit-mask: linear-gradient(135deg, transparent 5px, black 0) top left, 
+                  linear-gradient(-135deg, transparent 5px, black 0) top right, 
+                  linear-gradient(45deg, transparent 5px, black 0) bottom left, 
+                  linear-gradient(-45deg, transparent 5px, black 0) bottom right;
+    -webkit-mask-size: 51% 51%;
+    -webkit-mask-repeat: no-repeat;
+}
+
+.tape.bottom {
+    bottom: -15px;
+    right: 20px;
+    transform: rotate(-3deg);
+    width: 100px;
+}
+
+/* Camera Frame */
+.viewport-border {
+    background: #111;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #000;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    opacity: 0.9;
+}
+
+.rec-tag {
+    position: absolute;
+    top: 15px; left: 15px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.rec-tag span {
+    color: #FF5555;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.toggles {
+    display: flex;
+    background: #F0F0F2;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.t-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    color: #777;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.t-btn.active {
+    background: #fff;
+    color: var(--primary-text);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.shutter-btn {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    border: none;
+    background: #E0E0E0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
+}
+
+.shutter-btn:active { transform: scale(0.95); }
+.shutter-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.shutter-inner {
+    width: 54px; height: 54px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: background 0.2s;
+}
+
+.shutter-btn:hover .shutter-inner { background: var(--accent-dark); }
+
+#status-text {
+    font-size: 0.8rem;
+    color: #999;
+    margin: 0;
+    font-family: monospace;
+}
+
+/* --- Result Card --- */
+.result-card {
+    position: relative;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 380px;
+    transform: rotate(1deg);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-header h3 {
+    margin: 0 0 15px 0;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #BBB;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F9F9F9;
+    position: relative;
+    min-height: 300px;
+}
+
+canvas {
+    max-width: 100%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#empty-state {
+    position: absolute;
+    color: #CCC;
+    font-size: 0.9rem;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid #DDD;
+    padding: 12px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--primary-text);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: var(--primary-text);
+    color: #fff;
+    border-color: var(--primary-text);
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: white;
+    font-weight: 700;
+}
+.flash-layer {
+    position: absolute; inset: 0;
+    background: white; opacity: 0; pointer-events: none;
+}
+.hidden { display: none; }

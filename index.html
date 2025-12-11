@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavender Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+    <!-- ✨ Loading Screen ✨ -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <!-- Ensure your image is named 'logo.jpg' -->
+            <img src="logo.png" alt="Lavender Studio" class="loader-logo">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <p>Setting up the studio...</p>
+        </div>
+    </div>
+
+    <!-- ✨ Background Pattern (Dot Grid) ✨ -->
+    <div class="background-texture"></div>
+
+    <header>
+        <div class="logo-area">
+            <h1>PHOTOBOOTH</h1>
+            <p>Capture the Moment</p>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <!-- Error Message -->
+        <div id="camera-error" class="error-banner hidden">
+            <p><strong>Camera Issue</strong><br>Please allow camera access.</p>
+        </div>
+
+        <div class="booth-layout">
+            
+            <!-- Camera Section -->
+            <div class="camera-card">
+                <div class="tape top"></div>
+                
+                <div class="viewport-border">
+                    <div class="viewport">
+                        <video id="video" autoplay playsinline muted></video>
+                        
+                        <!-- Viewfinder UI -->
+                        <div class="rec-tag"><span>●</span> REC</div>
+                        <div id="countdown" class="overlay-text"></div>
+                        <div id="flash" class="flash-layer"></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div class="toggles">
+                        <button class="t-btn active" data-type="strip">Strip</button>
+                        <button class="t-btn" data-type="grid">Grid</button>
+                        <button class="t-btn" data-type="single">Portrait</button>
+                    </div>
+                    
+                    <button id="shutter-btn" class="shutter-btn">
+                        <div class="shutter-inner"></div>
+                    </button>
+                    <p id="status-text">Ready to snap</p>
+                </div>
+            </div>
+
+            <!-- Result Section -->
+            <div class="result-card hidden-initially" id="result-panel">
+                <div class="tape bottom"></div>
+                <div class="result-header">
+                    <h3>DEVELOPED PHOTO</h3>
+                </div>
+                
+                <div class="canvas-container">
+                    <canvas id="output-canvas"></canvas>
+                    <div id="empty-state">
+                        <span>Photos will appear here</span>
+                    </div>
+                </div>
+                
+                <div id="action-buttons" class="actions hidden">
+                    <button id="download-btn" class="action-btn">Save</button>
+                    <button id="print-btn" class="action-btn">Print</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <canvas id="temp-canvas" style="display: none;"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
