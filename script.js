@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxOut.textAlign = "center";
         ctxOut.fillStyle = "#2D2D35"; 
         ctxOut.font = "italic 40px 'Playfair Display'"; 
-        ctxOut.fillText("Lavender Studio", x, y);
+        ctxOut.fillText("PHOTOBOOTH", x, y);
         
         ctxOut.font = "16px 'DM Sans'";
         ctxOut.fillStyle = "#999";
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     downloadBtn.addEventListener('click', () => {
         const link = document.createElement('a');
-        link.download = `lavender-studio-${Date.now()}.jpg`;
+        link.download = `photobooth-${Date.now()}.jpg`;
         link.href = outputCanvas.toDataURL('image/jpeg', 0.95);
         link.click();
     });
@@ -254,4 +254,5 @@ document.addEventListener('DOMContentLoaded', () => {
             </body><script>setTimeout(()=>{window.print();window.close();},500);<\/script></html>
         `);
     });
+
 });
