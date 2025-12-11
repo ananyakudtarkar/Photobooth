@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxOut.textAlign = "center";
         ctxOut.fillStyle = "#2D2D35"; 
         ctxOut.font = "italic 40px 'Playfair Display'"; 
-        ctxOut.fillText("PHOTOBOOTH", x, y);
+        ctxOut.fillText("photobooth", x, y);
         
         ctxOut.font = "16px 'DM Sans'";
         ctxOut.fillStyle = "#999";
@@ -256,3 +256,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
